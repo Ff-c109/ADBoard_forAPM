@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ad push</title>
+  </head>
+  <body>
+    <h1>Ad push</h1>
+    <div style="border: 1px solid #000; width: 100vw; height: 50vh"></div>
+  </body>
+</html>

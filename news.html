@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ad push</title>
+  </head>
+  <body>
+    <div id="news" style="position: absolute; border: 1px solid #000; width: 80vw; height: 50vh">
+      <h2 id="newsHead" width="100%"  style="position: absolute; bottom: 80%; vertical-align: top">Microsoft Bing <a id="refreshButton" style="width: 0px; height: 0px; display: inline-block"><img id="refreshImg" src="/res/refresh.svg" width="100px" height="22%" /></a></h2>
+      <iframe style="position: absolute; bottom: 0px;" id="contentPage" src="http://bing.com/#scroll_cont" width="100%" height="80%" frameborder="no"></iframe>
+    </div>
+    <script>
+      function scrollToContent() {
+	  //document.getElementById("contentPage").contentWindow.window.scrollTo({top: 400});
+      }
+      var onece = 0;
+      document.getElementById("contentPage").onload = () => {
+	  //setTimeout(scrollToContent, 500);
+	    if(onece < 3) {
+	  	  console.log(document.getElementById("contentPage").src = (onece < 1 ? "https://cn.bing.com/#scroll_cont" : "https://cn.bing.com/#vs_cont"));
+		  onece++;
+		  setTimeout(document.getElementById("contentPage").onload(), 100);
+		}
+	  	setNewsSize();
+      }
+      function detect() {
+      	if(onece == 0)
+      		setTimeout(detect, 50);
+      	else {
+      		var i = 0;
+      		for(var i = 0; i < 3; i++) {
+      			document.getElementById("contentPage").onload();
+      			console.log("forceload");
+      		}
+      	}
+      }
+      //detect();
+      function setNewsSize() {
+	  document.getElementById("news").style.height = parseInt(window.innerHeight - 40) + "px";
+	  document.getElementById("news").style.width = window.innerWidth - 40 + "px";
+	  setTimeout(setNewsSize, 100);
+      }
+      function setRefreshButtonSize() {
+      	var refreshImg = document.getElementById("refreshImg");
+      	var newsHead = document.getElementById("newsHead");
+      	refreshImg.width = refreshImg.height = newsHead.offsetHeight - 12;
+      	setTimeout(setRefreshButtonSize, 100);
+      }
+      document.getElementById("refreshButton").onclick = () => {
+      	var path = document.getElementById("contentPage").src
+      	//document.getElementById("contentPage").src = "about:blank";
+      	document.getElementById("contentPage").src = path;
+      };
+      setRefreshButtonSize();
+      setTimeout(document.getElementById("refreshButton").onclick, 10000);
+    </script>
+  </body>
+</html>
