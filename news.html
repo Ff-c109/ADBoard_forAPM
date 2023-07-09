@@ -13,7 +13,7 @@
 	  //document.getElementById("contentPage").contentWindow.window.scrollTo({top: 400});
       }
       var onece = 0;
-      document.getElementById("contentPage").onload = () => {
+      document.getElementById("contentPage").onload = function() {
 	  //setTimeout(scrollToContent, 500);
 	    if(onece < 3) {
 	  	  console.log(document.getElementById("contentPage").src = (onece < 1 ? "https://cn.bing.com/#scroll_cont" : "https://cn.bing.com/#vs_cont"));
@@ -46,7 +46,7 @@
       	refreshImg.width = refreshImg.height = newsHead.offsetHeight - 12;
       	setTimeout(setRefreshButtonSize, 100);
       }
-      document.getElementById("refreshButton").onclick = () => {
+      document.getElementById("refreshButton").onclick = function() {
       	var path = document.getElementById("contentPage").src
       	//document.getElementById("contentPage").src = "about:blank";
       	document.getElementById("contentPage").src = path;
