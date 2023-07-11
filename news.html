@@ -44,13 +44,30 @@
       	var refreshImg = document.getElementById("refreshImg");
       	var newsHead = document.getElementById("newsHead");
       	refreshImg.width = refreshImg.height = newsHead.offsetHeight - 12;
-      	setTimeout(setRefreshButtonSize, 100);
+      	//setTimeout(setRefreshButtonSize, 100);
       }
       document.getElementById("refreshButton").onclick = function() {
       	var path = document.getElementById("contentPage").src
       	//document.getElementById("contentPage").src = "about:blank";
       	document.getElementById("contentPage").src = path;
-      };
+      }; 
+      var widthOld;
+      var heightOld;
+      function detectSizeChange() {
+	      var widthNow = window.innerWidth;
+	      var heightNow = window.innerHeight;
+	      if(widthOld == widthNow && heightOld == heightNow) {
+		      setTimeout(detectSizeChange,200);
+	      }
+	      else {
+		      widthOld = widthNow;
+		      heightOld = heightNow;
+		      setRefreshButtonSize();
+		      setTimeout(detectSizeChange,200);
+	      }
+      }
+      detectSizeChange();
+
       setRefreshButtonSize();
       setTimeout(document.getElementById("refreshButton").onclick, 10000);
     </script>

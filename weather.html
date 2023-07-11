@@ -7,7 +7,7 @@
   <body>
     <div id="news" style="position: absolute; border: 1px solid #000; width: 80vw; height: 50vh">
       <h2 id="newsHead" width="100%"  style="position: absolute; top: 0px; vertical-align: top">天气 <a id="refreshButton" style="width: 0px; height: 0px; display: inline-block"><img id="refreshImg" src="res/refresh.svg" width="100px" height="22%" /></a></h2>
-      <iframe style="position: absolute; bottom: 0px;" id="contentPage" src="https://bing.com/search?q=天气#b_content" width="100%" height="80%" frameborder="no"></iframe>
+      <iframe style="position: absolute; bottom: 0px;" id="contentPage" src="https://weather.cma.cn/" width="100%" height="80%" frameborder="no"></iframe>
     </div>
     <script>
       function scrollToContent() {
@@ -27,13 +27,30 @@
       	var refreshImg = document.getElementById("refreshImg");
       	var newsHead = document.getElementById("newsHead");
       	refreshImg.width = refreshImg.height = newsHead.offsetHeight - 12;
-      	setTimeout(setRefreshButtonSize, 100);
+      	//setTimeout(setRefreshButtonSize, 100);
       }
       document.getElementById("refreshButton").onclick = function() {
       	var path = document.getElementById("contentPage").src
       	document.getElementById("contentPage").src = "about:blank";
       	document.getElementById("contentPage").src = path;
       };
+
+      var widthOld;
+      var heightOld;
+      function detectSizeChange() {
+	      var widthNow = window.innerWidth;
+	      var heightNow = window.innerHeight;
+	      if(widthOld == widthNow && heightOld == heightNow) {
+		      setTimeout(detectSizeChange,200);
+	      }
+	      else {
+		      widthOld = widthNow;
+		      heightOld = heightNow;
+		      setRefreshButtonSize();
+		      setTimeout(detectSizeChange,200);
+	      }
+      }
+      detectSizeChange();
       setRefreshButtonSize();
     </script>
   </body>
