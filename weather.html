@@ -26,7 +26,8 @@
       function setRefreshButtonSize() {
       	var refreshImg = document.getElementById("refreshImg");
       	var newsHead = document.getElementById("newsHead");
-      	refreshImg.width = refreshImg.height = newsHead.offsetHeight - 12;
+	refreshImg.width = refreshImg.height = 0;
+      	refreshImg.width = refreshImg.height = newsHead.offsetHeight - 24;
       	//setTimeout(setRefreshButtonSize, 100);
       }
       document.getElementById("refreshButton").onclick = function() {
